@@ -1,18 +1,41 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      userInput: "",
+      myList: [
+        "This",
+        "is",
+        "a",
+        "list",
+        "( ͡° ͜ʖ ͡°)"
+      ]
+    };
+
+    this.handleChange = this.handleChange.bind(this);
+    this.filterItem = this.filterItem.bind(this);
+  }
+
+  handleChange(event) {
+    // console.log(event.target.value);
+    this.setState({ userInput: event.target.value });
+  }
+
+  filterItem(arr, str) {
+    let filteredArr = this.state.myList.filter((val, i, arr) => val.includes(str));
+    let newArr = filteredArr.map((val, i, arr) => <h1 key={ i }>{ val }</h1>)
+    return newArr;
+  }
+
   render() {
     return (
       <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <input onChange={ this.handleChange } />
+        { this.filterItem(this.state.myList, this.state.userInput) }
       </div>
     );
   }
