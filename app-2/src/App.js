@@ -1,18 +1,31 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      myList: ["This", "is", "a", "list", "( ͡° ͜ʖ ͡°)"]
+    };
+  }
+
+  displayList(arr) {
+    // let newArr = [];
+    // for (let i = 0; i < arr.length; i++) {
+    //   newArr.push(<h1 key={ i }>{ arr[i] }</h1>);
+    // }
+
+    let newArr = arr.map((val, i, arr) => <h1 key={ i }>{ val }</h1>);
+
+    return newArr;
+  }
+
   render() {
+
     return (
       <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        { this.displayList(this.state.myList) }
       </div>
     );
   }
